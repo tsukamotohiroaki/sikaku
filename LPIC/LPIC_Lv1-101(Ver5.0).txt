@@ -29,7 +29,7 @@ blacklist: ロードしたくないカーネルモジュールを指定する
 
 ・接続されたUSBデバイスの情報を表示するコマンド
 lsusb
-cat /proc/bus/usb/devices
+/proc/bus/usb/devices
 
 ・スピーカー、マイクなどが属しているUSBのデバイスクラス
 Audio Class
@@ -51,12 +51,12 @@ modprobe
 
 ・PCIデバイスの情報を表示するコマンド
 lspci
-cat /proc/bus/pci/devices
-※PCI(Peripheral Components Interconnect)デバイスとはPCIバスに接続されたデバイスのこと
+/proc/bus/pci/devices
+※PCI(Peripheral Components Interconnect)デバイスとは、PCIバスに接続されたデバイスのこと
 
 ・デバイスが使用中のDMAチャネルに関する情報が確認できるファイル
 /proc/dma
-※DMAとは、CPUを介することなくメインメモリと周辺機器の間で直接的に情報転送を行う方式
+※DMAとは、CPUを介することなくメインメモリと周辺機器の間で直接的に情報転送を行う方式のこと
 
 ・lspciコマンドで取得できる情報
 I/Oポートアドレス
@@ -130,14 +130,16 @@ systemctl list-unit-files
 起動デバイスの順序を設定できる
 
 ・systemdの管理単位であるユニット
-device
-mount
-swap
-service
-target
+※Unitには各機能ごとに拡張子が割り当てられており、拡張子を見ることでどういった機能のためのUnitかが判別できるようになっています。
+device：各種デバイスを管理するUnit
+mount：ファイルシステムのマウントを管理するUnit
+service：サービスを制御するUnit
+swap：スワップ領域を管理するUnit
+target：複数のサービスを一つのグループにするためのUnit
 
 ・systemdが稼働するシステムにおいて、各サービスが稼働しているかを確認するためのサブコマンド
 is-active
+例)systemctl is-active sshd
 
 ・カーネルのログが記録されるなど、Linuxでメインで使用されるログファイル
 /var/log/messages
