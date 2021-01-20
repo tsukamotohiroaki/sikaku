@@ -97,7 +97,6 @@ cgroupsでプロセスのリソースを管理する
 ・journalctlコマンドのオプションで、dmesgコマンドと同じ情報を得られるオプション
 -k
 --dmesg
-※journalctlコマンドの「-k」オプション、または「--dmesg」オプションで、dmesgコマンドと同じ情報（起動時にカーネルが出力したメッセージ）が出力されます。
 
 ・systemctlコマンドを使って、postfixサービスに設定ファイルを再読み込みさせるコマンド
 systemctl reload postfix
