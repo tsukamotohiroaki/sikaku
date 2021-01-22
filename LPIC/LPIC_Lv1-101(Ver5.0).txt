@@ -5,14 +5,14 @@ LPIC_Lv1-101(Ver5.0)
 lsmod
 cat /proc/modules
 
-・I/Oポートアドレスの情報
-「/proc/ioports」ファイルで確認できる
+・I/Oポートアドレスの情報を確認できるファイル
+/proc/ioports
 
-・メモリの使用状況
-「/proc/meminfo」ファイルで確認できる
+・メモリの使用状況を確認できるファイル
+/proc/meminfo
 
 ・udevが使用するデバイス設定情報ファイルの所在
-「/etc/udev/rules.d」に配置される
+/etc/udev/rules.d
 
 ・modprobeの設定ファイル
 /etc/modprobe.d/myconfig.conf
@@ -32,7 +32,7 @@ blacklist: ロードしたくないカーネルモジュールを指定する
 
 ・接続されたUSBデバイスの情報を表示するコマンド
 lsusb
-/proc/bus/usb/devices
+cat /proc/bus/usb/devices
 
 ・スピーカー、マイクなどが属しているUSBのデバイスクラス
 Audio Class
@@ -54,7 +54,7 @@ modprobe
 
 ・PCIデバイスの情報を表示するコマンド
 lspci
-/proc/bus/pci/devices
+cat /proc/bus/pci/devices
 ※PCI(Peripheral Components Interconnect)デバイスとは、PCIバスに接続されたデバイスのこと
 
 ・デバイスが使用中のDMAチャネルに関する情報が確認できるファイル
@@ -129,7 +129,7 @@ systemctl stop postfix
 ・systemdが稼働するシステムにおいてmysqldサービスを起動するコマンド
 systemctl start mysqld
 
-・systemdが稼働するシステムにおいて、システム起動時にhttpdサービスが自動起動しないようにしたい。実行すべきコマンド
+・systemdが稼働するシステムにおいて、システム起動時にhttpdサービスが自動起動させないためのコマンド
 systemctl disable httpd
 
 ・systemdが管理するジャーナル（システムログ）を参照するためのコマンド
@@ -149,7 +149,7 @@ BIOS/UEFI → ブートローダ → カーネル → init
 ・システム起動時においてのブートローダの説明
 記憶装置（HDD）内のカーネルをロードし、制御を移す
 
-・カーネルのログが記録されるなど、Linuxでメインで使用されるログファイル
+・カーネルのログなどが記録されるLinuxでメインのログファイル
 /var/log/messages
 
 ・起動時にカーネルが出力したメッセージを表示するコマンド
