@@ -194,3 +194,123 @@ GPTというパーティション形式に対応しており、3TB以上のHDD�
 
 ・100GBの記憶装置(HDD)を接続したが、実際の半分以下の容量で認識されてしまった場合の解決方法
 BIOSをアップデートする
+
+■ランレベル/ブートターゲットの変更
+・systemdの動作するシステムにおいて、次回起動時にメンテナンスを行うために最低限のシステムサービス状態で起動させたい。次回起動時のターゲットとしてどれを指定すればよいか
+rescue.target
+runlevel1.target
+
+・システムを今すぐ再起動させるコマンド
+reboot
+telinit 6
+shutdown -r now
+
+・systemctlコマンドのサブコマンドで、システムを停止させる
+halt
+poweroff
+
+・すでにマルチユーザモードで起動しているシステムを、メンテナンスのためにシングルユーザモードに変更するコマンド
+init s
+telinit 1
+telinit S
+
+・23:00にシステムを停止するようshutdownコマンドをキャンセルするコマンド
+shutdown -c
+
+・現在22:50である。「Rebooting in 10 minutes」というメッセージを表示して、23:00にサーバを再起動するコマンド
+shutdown -r 23:00 "Rebooting in 10 minutes"
+shutdown -r +10 "Rebooting in 10 minutes"
+
+・systemdが稼働するシステムにおいて、次回起動時のターゲットを設定するためのsystemctlのサブコマンド
+set-default
+
+・現在22:00である。23:00にサーバを停止するコマンド
+shutdown -h 23:00
+shutdown -h +60
+
+・ランレベル0の説明
+システム停止
+
+・システムを今すぐ再起動させるコマンド
+telinit 6
+shutdown -r now
+systemctl reboot
+systemctl start reboot.target
+
+・ランレベル6の説明
+システム再起動
+
+・systemdの動作するシステムにおいて、メンテナンスのために以下のコマンドでシングルユーザーモードに変更し、作業を行った。
+# systemctl rescue
+作業が終わったので通常の起動状態に戻したい。どうすれば良いか
+Ctrl-Dを入力する
+systemctl reboot コマンドを実行する
+systemctl default コマンドを実行する
+
+・systemdが稼働するシステムにおいて、次回起動時のランレベルの確認作業を行った。
+/etc/systemd/system
+default.target
+
+・SysVinitを採用したシステムにおいて、シングルユーザモードでのブートプロセス中にサービスを停止させるファイル
+/etc/rc1.d/K01bluetooth
+
+・systemdが稼働するシステムにおいて、次回起動時のターゲットが確認できるsystemctlのサブコマンド
+get-default
+
+・ログイン中の全ユーザーにメッセージを送信するコマンド
+wall
+
+・systemdが稼働するシステムにおいて、次回起動時にグラフィカルログインさせるようにしたい。実行すべきコマンド
+rm -f /etc/systemd/system/default.target
+ln -s /lib/systemd/system/graphical.target /etc/systemd/system/default.target
+
+・シャットダウン処理を行わず、メッセージ通知のみを行うshutdownコマンドのオプション
+-k
+
+・SysVinitを採用したシステムの特徴
+ランレベル3では「/etc/rc3.d」配下のスクリプトが実行される
+
+・systemdが稼働するシステムにおいて、次回起動時にグラフィカルログインさせるコマンド
+systemctl set-default graphical.target
+
+・「/etc/inittab」を設定ファイルとして使用しないinitプログラム
+Upstart
+systemd
+
+・SysVinitを採用したシステムの設定ファイルで、デフォルトのランレベルの設定ファイル
+/etc/inittab
+
+・SysVinitの設定ファイル「/etc/inittab」を編集した。即座に変更を反映させるコマンド
+init Q
+telinit q
+
+・以下のコマンドを実行すると何が起こるか
+# systemctl start poweroff.target
+システム終了処理が行われる
+telinit 0と同じことが起こる
+
+・systemdの動作するシステムにおいて、サーバとして動作させるのに適切な起動時のターゲット
+runlevel3.target
+multi-user.target
+
+・デフォルトのランレベルとして、設定してはいけないもの
+0
+6
+
+・SysVinitを採用したシステムにおいて、「ctrl+alt+del」キーを押下した際のシステムの動作を設定するファイル
+/etc/inittab
+
+・現在のランレベルを、どのランレベルにでも変更できるコマンド
+init
+telinit
+
+・現在および1つ前のランレベルを調べることができるコマンド
+runlevel
+
+・マルチユーザモードとなるランレベル
+2
+3
+5
+
+・電源管理に関するACPIイベントを監視・処理するデーモン
+acpid
