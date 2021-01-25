@@ -205,7 +205,7 @@ reboot
 telinit 6
 shutdown -r now
 
-・systemctlコマンドのサブコマンドで、システムを停止させる
+・システムを停止させるsystemctlコマンドのサブコマンド
 halt
 poweroff
 
@@ -260,7 +260,7 @@ get-default
 ・ログイン中の全ユーザーにメッセージを送信するコマンド
 wall
 
-・systemdが稼働するシステムにおいて、次回起動時にグラフィカルログインさせるようにしたい。実行すべきコマンド
+・systemdが稼働するシステムにおいて、次回起動時にグラフィカルログインさせるコマンド
 rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/graphical.target /etc/systemd/system/default.target
 
