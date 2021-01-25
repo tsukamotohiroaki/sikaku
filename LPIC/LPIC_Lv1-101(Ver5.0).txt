@@ -269,9 +269,10 @@ runlevel
 ・SysVinitの設定ファイル「/etc/inittab」を編集した。即座に変更を反映させるコマンド
 init Q
 telinit q
+※/etc/inittabファイルとは、OSを起動する際、OSの起動を司る「initプロセス」が利用するファイルです。
+※/etc/inittabファイルは、デフォルトのランレベルの指定、デバイスなどの初期化、initの起動、ブート時の処理、ランレベルごとのrcスクリプトの実行などを指示します。
 ※SysVinitの設定ファイル「/etc/inittab」ファイルは通常Linuxシステムの起動時に読み込まれます。
 ※initまたはtelinitコマンドに「q」か「Q」オプションを指定して実行すると、「/etc/inittab」を再読み込みさせ即座に変更を反映させることができます。
-
 
 ・SysVinitを採用したシステムにおいて、「ctrl+alt+del」キーを押下した際のシステムの動作を設定するファイル
 /etc/inittab
