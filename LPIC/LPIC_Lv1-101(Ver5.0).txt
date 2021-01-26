@@ -214,6 +214,9 @@ default.target
 ・systemdが稼働するシステムにおいて、次回起動時のターゲットが確認できるsystemctlのサブコマンド
 get-default
 
+・systemdが稼働するシステムにおいて、次回起動時のターゲットを設定するためのsystemctlのサブコマンド
+set-default
+
 ・systemdが稼働するシステムにおいて、次回起動時にグラフィカルログインさせるコマンド
 rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/graphical.target /etc/systemd/system/default.target
@@ -277,8 +280,7 @@ telinit q
 ・SysVinitを採用したシステムにおいて、「ctrl+alt+del」キーを押下した際のシステムの動作を設定するファイル
 /etc/inittab
 
-・以下のコマンドを実行すると何が起こるか
-# systemctl start poweroff.target
+・systemctl start poweroff.target を実行すると何が起こるか
 システム終了処理が行われる
 telinit 0と同じことが起こる
 
@@ -296,9 +298,6 @@ shutdown -c
 ・現在22:50である。「Rebooting in 10 minutes」というメッセージを表示して、23:00にサーバを再起動するコマンド
 shutdown -r 23:00 "Rebooting in 10 minutes"
 shutdown -r +10 "Rebooting in 10 minutes"
-
-・systemdが稼働するシステムにおいて、次回起動時のターゲットを設定するためのsystemctlのサブコマンド
-set-default
 
 ・現在22:00である。23:00にサーバを停止するコマンド
 shutdown -h 23:00
