@@ -184,12 +184,12 @@ systemctl start mysqld
 ・systemdが稼働するシステムにおいて、システム起動時にhttpdサービスが自動起動させないためのコマンド
 systemctl disable httpd
 
+・systemdが稼働するシステムにおいて、システム起動時にhttpdサービスが自動起動するためのコマンド
+systemctl enable httpd
+
 ・systemdが管理するジャーナル（システムログ）を参照するためのコマンド
 journalctl
 ※systemdの動作するシステムではsystemd-journaldデーモンを動作させ、ログの一元管理を行います。
-
-・systemdが稼働するシステムにおいて、システム起動時にhttpdサービスが自動起動するためのコマンド
-systemctl enable httpd
 
 ・journalctlコマンドのオプションで、dmesgコマンドと同じ情報を得られるオプション
 -k
