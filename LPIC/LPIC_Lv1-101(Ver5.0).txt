@@ -227,6 +227,9 @@ systemctl set-default graphical.target
 ・「/etc/inittab」を設定ファイルとして使用しないinitプログラム
 Upstart
 systemd
+※Upstartやsystemdは、従来のSysVinitと比べてシステム起動時の初期化作業が高速化されています。
+※Upstarは、イベント駆動型の初期化プロセス
+※Upstartでは初期化時の依存関係を定義する必要がある
 
 ・systemdの動作するシステムにおいて、サーバとして動作させるのに適切な起動時のターゲット
 runlevel3.target
