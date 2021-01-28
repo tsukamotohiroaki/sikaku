@@ -230,6 +230,8 @@ systemd
 ※Upstartやsystemdは、従来のSysVinitと比べてシステム起動時の初期化作業が高速化されています。
 ※Upstarは、イベント駆動型の初期化プロセス
 ※Upstartでは初期化時の依存関係を定義する必要がある
+※Upstartは「/etc/event.d/rc-default」ファイルの「telinit 2」の部分を編集することでデフォルトのランレベルを設定できます。
+※systemdでは、「/lib/systemd/system/runlevel[0-6].target」ファイル([0-6]部分はランレベルを指定)のシンボリックリンクを「/etc/systemd/system/default.target」として作成することでデフォルトのランレベルを設定できます。
 
 ・systemdの動作するシステムにおいて、サーバとして動作させるのに適切な起動時のターゲット
 runlevel3.target
@@ -250,6 +252,8 @@ telinit S
 
 ・SysVinitを採用したシステムにおいて、シングルユーザモードでのブートプロセス中にサービスを停止させるファイル
 /etc/rc1.d/K01bluetooth
+※SysVinitでは、システムの起動時やランレベルの変更時にinitが「/etc/inittab」を参照し、ランレベルに応じたスクリプトを実行して各種サービスを順に起動/停止していきます。
+※各ランレベルに応じたスクリプトは「/etc/rc[0-6].d」に入っています。
 
 ・SysVinitを採用したシステムの設定ファイルで、デフォルトのランレベルの設定ファイル
 /etc/inittab
