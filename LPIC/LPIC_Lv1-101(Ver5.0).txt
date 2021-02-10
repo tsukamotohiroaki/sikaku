@@ -420,36 +420,17 @@ UEFIを使ったシステムの領域である
 ブートローダや起動に必要なドライバなどが置かれている
 
 ■ブートマネージャのインストール
-・起動中のカーネルから出力される情報を抑制するコマンド
-grub> linux /boot/vmlinuz-2.6.35 _____________
-quiet
-※grub> linux カーネルイメージ [オプション]
-
-・以下はGRUB2の設定ファイル「/boot/grub/grub.cfg」の抜粋です。ルートパーティションを2番目のディスクの3番目のパーティションに指定するコマンド
-set root=______________
-(hd1,3)
-※GRUB2でパーティションを指定する際は、「(hdディスク番号,パーティション番号)」のように指定します。ディスク番号は0から、パーティション番号は1から数えます。
+・GRUB LegacyとGRUB2の説明
+GRUB Legacyの設定ファイルは「/boot/grub/menu.lst」である
+GRUBのバージョンが1.9以降のものを「GRUB2」と呼ぶ
+パーティション番号は、GRUB Legacyは0から、GRUB2は1から数える
 
 ・GRUB2の設定ファイルにおいて、各項目の名前としてメニューに表示するエントリ名を指定する項目
 menuentry
 
-systemdの動作するシステムにおいて、シングルユーザーモードで起動したい。適切なカーネルパラメータ
-systemd.unit=rescue
-
-・GRUB Legacyの設定ファイル「/boot/grub/menu.lst」において、ルートパーティションを2番目のディスクの3番目のパーティションに指定する方法
-root (hd1,2)
-※GRUB Legacy（GRUB1）の設定ファイル「/boot/grub/menu.lst」でルートパーティションを指定するには、「root (hdディスク番号,パーティション番号)」と指定します。その際、番号はどちらも0から数えます。
-
-・ブートローダにGRUBを使っているHDDに追加で別のOSをインストールしたところ、MBR（マスターブートレコード）が書き換えられてしまい、GRUBが起動しなくなってしまった。バックアップからHDDのMBRを復元したいが既存のパーティションテーブルは残しておきたい。
-上記の要件にしたがって作業を行うにあたって、以下のコマンドの空欄に当てはまるものはどれか。二つ選べ。
-# dd if=mbr_backup.img of=/dev/sda bs=[　　　] count=1
-440
-446
-
-以下はGRUB2の設定ファイル「/boot/grub/grub.cfg」の抜粋です。ルートパーティションを1番目のディスクの4番目のパーティションに指定したい。下線部の記述として適切なものは次のうちどれか。
-set root=______________
-(hd0,4)
-※GRUB2でパーティションを指定する際は、「(hdディスク番号,パーティション番号)」のように指定します。ディスク番号は0から、パーティション番号は1から数えます。
+・ブートローダであるGRUB Legacyの設定ファイル
+/boot/grub/menu.lst
+/boot/grub/grub.conf
 
 ・ブートローダであるGRUB2の設定ファイル
 /boot/grub/grub.cfg
@@ -459,53 +440,69 @@ set root=______________
 実行するコマンドはない
 ※GRUB Legacy（GRUB1）は設定ファイル「/boot/grub/menu.lst」を変更しても、実行するコマンドはありません。
 
-・GRUB Legacyの設定ファイル「/boot/grub/menu.lst」において、ルートパーティションを1番目のディスクの4番目のパーティションに指定する方法
-root (hd0,3)
-GRUB Legacy（GRUB1）の設定ファイル「/boot/grub/menu.lst」でルートパーティションを指定するには、「root (hdディスク番号,パーティション番号)」と指定します。その際、番号はどちらも0から数えます。
-
-・ブートローダであるGRUB Legacyの設定ファイル
-/boot/grub/menu.lst
-/boot/grub/grub.conf
-
 ・ブートローダであるGRUB2の設定ファイルの内容を変更したい。変更内容を反映させるコマンド
 grub-mkconfig
 
-・GRUB LegacyとGRUB2の説明
-GRUB Legacyの設定ファイルは「/boot/grub/menu.lst」である
-GRUBのバージョンが1.9以降のものを「GRUB2」と呼ぶ
-パーティション番号は、GRUB Legacyは0から、GRUB2は1から数える
-
-・ルートパーティションを「/dev/sda2」に指定して起動させたい。
-grub> linux /boot/vmlinuz-2.6.35 _____________
-root=/dev/sda2
-
 ・GRUB2の設定ファイルにおいて、ロードするモジュールを指定する項目
 insmod
-
-・第一段階のブートローダが通常格納される場所
-MBR（マスターブートレコード）
 
 ・GRUB2の設定を直接編集できるファイル
 /etc/default/grub
 「/etc/grub.d」ディレクトリ内のファイル
 
-・GRUB Legacyの設定ファイル「/boot/grub/menu.lst」において、システム起動時のカーネルイメージ「/boot/vmlinuz-2.6.35 」と起動オプションを指定したい。
-____________ /boot/vmlinuz-2.6.35 root=/dev/hda1
-kernel
-
-・以下のコマンドの実行結果
-# dd if=/dev/zero of=/dev/sda bs=446 count=1
-ブートローダのみがゼロクリアされる
-
 ・ブートローダであるGRUB LegacyまたはGRUB2をインストールするコマンド
 grub-install
 
-・「/sbin/init」の代わりに「/bin/bash」を起動したい。
-grub> kernel /boot/vmlinuz-2.6.35 _____________
-init=/bin/bash
+・GRUB Legacyの設定ファイル「/boot/grub/menu.lst」において、ルートパーティションを2番目のディスクの3番目のパーティションに指定する方法
+root (hd1,2)
+※GRUB Legacy（GRUB1）の設定ファイル「/boot/grub/menu.lst」でルートパーティションを指定するには、「root (hdディスク番号,パーティション番号)」と指定します。その際、番号はどちらも0から数えます。
 
-・メンテナンス用にシングルユーザモードで起動したい。
+・GRUB Legacyの設定ファイル「/boot/grub/menu.lst」において、ルートパーティションを1番目のディスクの4番目のパーティションに指定する方法
+root (hd0,3)
+GRUB Legacy（GRUB1）の設定ファイル「/boot/grub/menu.lst」でルートパーティションを指定するには、「root (hdディスク番号,パーティション番号)」と指定します。その際、番号はどちらも0から数えます。
+
+・GRUB Legacyの設定ファイル「/boot/grub/menu.lst」において、システム起動時のカーネルイメージ「/boot/vmlinuz-2.6.35 」と起動オプションを指定するコマンド
+kernel /boot/vmlinuz-2.6.35 root=/dev/hda1
+
+・GRUB2の設定ファイル「/boot/grub/grub.cfg」の抜粋です。ルートパーティションを2番目のディスクの3番目のパーティションに指定するコマンド
+set root=______________
+(hd1,3)
+※GRUB2でパーティションを指定する際は、「(hdディスク番号,パーティション番号)」のように指定します。ディスク番号は0から、パーティション番号は1から数えます。
+
+・GRUB2の設定ファイル「/boot/grub/grub.cfg」の抜粋です。ルートパーティションを1番目のディスクの4番目のパーティションに指定したい。下線部の記述として適切なものは次のうちどれか。
+set root=______________
+(hd0,4)
+※GRUB2でパーティションを指定する際は、「(hdディスク番号,パーティション番号)」のように指定します。ディスク番号は0から、パーティション番号は1から数えます。
+
+・ルートパーティションを「/dev/sda2」に指定して起動させるコマンド
+grub> linux /boot/vmlinuz-2.6.35 root=/dev/sda2
+
+・「/sbin/init」の代わりに「/bin/bash」を起動するコマンド
+grub> kernel /boot/vmlinuz-2.6.35 init=/bin/bash
+
+・メンテナンス用にシングルユーザモードで起動するコマンド
 grub> kernel /boot/vmlinuz-2.6.35 _____________
 1
 s
 single
+
+・起動中のカーネルから出力される情報を抑制するコマンド
+grub> linux /boot/vmlinuz-2.6.35 quiet
+※grub> linux カーネルイメージ [オプション]
+
+・第一段階のブートローダが通常格納される場所
+MBR（マスターブートレコード）
+
+・コマンドの実行結果
+# dd if=/dev/zero of=/dev/sda bs=446 count=1
+ブートローダのみがゼロクリアされる
+
+・ブートローダにGRUBを使っているHDDに追加で別のOSをインストールしたところ、MBR（マスターブートレコード）が書き換えられてしまい、GRUBが起動しなくなってしまった。バックアップからHDDのMBRを復元したいが既存のパーティションテーブルは残しておきたい。
+上記の要件にしたがって作業を行うにあたって、以下のコマンドの空欄に当てはまるもの
+# dd if=mbr_backup.img of=/dev/sda bs=[　　　] count=1
+440
+446
+
+・systemdの動作するシステムにおいて、シングルユーザーモードで起動したい。適切なカーネルパラメータ
+systemd.unit=rescue
+
