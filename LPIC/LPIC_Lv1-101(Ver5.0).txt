@@ -633,3 +633,178 @@ dpkg --status ssh
 ・dpkgツールの設定ファイル
 /etc/dpkg/dpkg.cfg
 
+■RPMとYUMパッケージ管理
+・YUMツールの説明として正しいものはどれか。
+ネットワーク経由で最新のパッケージを取得することができる
+YUMの組み込み変数がある
+
+・インターネット上ないしはメディア上のパッケージ情報のデータベースを使い、依存関係を調整しながら、パッケージのインストール・アンインストール・アップグレードを行うことができるコマンド
+yum
+
+・yumコマンドの後継であり、yumと同様のオプションやリポジトリを使用できるコマンド
+dnf
+
+・yumコマンドを使用して、アップデート可能な全てのパッケージをアップデートしたい。
+yum update
+
+・yumコマンドを使用して、アップデート可能なパッケージを確認したい。
+yum check-update
+
+・yumコマンドを使用して、キーワード「yum」を含むパッケージを表示させたい。
+yum search yum
+
+・yumコマンドを使用して、「php」パッケージがインストールされているかどうか確認したい。ただし、「php」パッケージの詳細な情報は必要ない。
+yum list php
+
+・yumコマンドを使用して、「php」パッケージの詳細な情報を表示させたい。
+yum info php
+
+・yumコマンドを使用して、「php」パッケージをインストールしたい。
+yum install php
+
+・yumコマンドを使用して、パッケージグループを一覧表示させたい。
+yum grouplist
+
+・yumコマンドを使用して、「Emacs」パッケージグループをインストールしたい。
+yum groupinstall Emacs
+
+・yumコマンドを使用して、「php」パッケージをアンインストールしたい。
+yum remove php
+
+・YUMツールではネットワーク経由で最新のパッケージを取得することができる。パッケージの取得元(リポジトリ)を設定するファイルが格納されているディレクトリ
+/etc/yum.repos.d
+
+・YUMツールの設定ファイル
+/etc/yum.conf
+
+・RPMツールにおいてパッケージのインストール・アンインストールなど、基本的なパッケージ管理を行うコマンド
+rpm
+
+・rpmコマンドを使用して、「postfix」パッケージがインストールされているかどうか確認したい。
+rpm -q postfix
+rpm --query postfix
+
+・rpmコマンドを使用して、「/etc/yum.conf」ファイルのインストール元パッケージを表示させたい。
+rpm -qf /etc/yum.conf
+rpm --query --file /etc/yum.conf
+
+・rpmコマンドを使用して、インストールされている「postfix」パッケージに含まれるファイルを調べたい。
+rpm -ql postfix
+rpm --query --list postfix
+
+・rpmコマンドを使用して、インストールされている「postfix」パッケージの詳細情報を調べたい。
+rpm -qi postfix
+rpm --query --info postfix
+
+・rpmコマンドを使用して、インストールされている「postfix」パッケージの変更履歴を調べたい。
+rpm -q --changelog postfix
+rpm --query --changelog postfix
+
+・rpmコマンドを使用して、インストールされる前に「postfix-1.1.12-1.i386.rpm」ファイルでパッケージの詳細情報を確認したい。
+rpm -qip postfix-1.1.12-1.i386.rpm
+rpm --query --info --package postfix-1.1.12-1.i386.rpm
+
+・rpmコマンドを使用して、インストールする前に「postfix-1.1.12-1.i386.rpm」ファイルの変更履歴を確認したい。
+rpm -qp --changelog postfix-1.1.12-1.i386.rpm
+rpm --query -p --changelog postfix-1.1.12-1.i386.rpm
+
+・rpmコマンドを使用して、「postfix」パッケージからインストールされた設定ファイルのみを表示させたい。
+rpm -qc postfix
+rpm --query --configfiles postfix
+
+・rpmコマンドを使用して、インストール前に「postfix-1.1.12-1.i386.rpm」ファイルからインストールされるファイルを調べたい。
+rpm -qlp postfix-1.1.12-1.i386.rpm
+rpm --query --list --package postfix-1.1.12-1.i386.rpm
+
+・rpmコマンドを使用して、インストール前の「emacs-23.1-28.el6.x86_64.rpm」パッケージの依存関係を調べたい。
+rpm -qRp emacs-23.1-28.el6.x86_64.rpm
+rpm --query --requires --package emacs-23.1-28.el6.x86_64.rpm
+
+・rpmコマンドを使用して、システムにインストールされている全てのパッケージを表示させたい。
+rpm -qa
+rpm --query --all
+
+・rpmコマンドを使用して、インストールされている全パッケージの検査を行いたい。
+rpm -Va
+rpm --verify --all
+
+・rpmコマンドを使用して、「postfix」パッケージの検査を行いたい。ただし、MD5によるファイルの改ざんの検査は行わないものとする。
+rpm -V --nomd5 postfix
+rpm --verify --nomd5 postfix
+
+・rpmコマンドを使用して、「postfix-1.1.12-1.i386.rpm」ファイルからインストールされる設定ファイルのみを表示させたい。
+rpm -qcp postfix-1.1.12-1.i386.rpm
+rpm --query -cp postfix-1.1.12-1.i386.rpm
+
+・rpmコマンドを使用して、「procmail-3.22-9.i386.rpm」パッケージをインストールしたい。元々「procmail」がインストールされていない場合、これが可能なコマンド
+rpm -i procmail-3.22-9.i386.rpm
+rpm -U procmail-3.22-9.i386.rpm
+
+・rpmコマンドを使用して、「procmail-3.22-25.1.el6.i686.rpm」パッケージを新規インストールする際、進行状況を表示させたい。
+rpm -ih procmail-3.22-25.1.el6.i686.rpm
+rpm -i --hash procmail-3.22-25.1.el6.i686.rpm
+
+・rpmコマンドを使用して、「procmail-3.22-25.1.el6.i686.rpm」パッケージを新規インストールする際、詳細情報を表示させたい。
+rpm -iv procmail-3.22-25.1.el6.i686.rpm
+rpm --install -v procmail-3.22-25.1.el6.i686.rpm
+
+・rpmコマンドを使用して、「procmail-3.22-9.i386.rpm」パッケージを新規インストールする前にエラーなどが出ないかを確認したい。
+rpm -i --test procmail-3.22-9.i386.rpm
+rpm --install --test procmail-3.22-9.i386.rpm
+
+・rpmコマンドを使用して、「procmail」パッケージを「procmail-3.22-9.i386.rpm」にアップグレードしたい。また、パッケージが存在しない場合はインストールしたい。
+rpm -U procmail-3.22-9.i386.rpm
+rpm --upgrade procmail-3.22-9.i386.rpm
+
+・rpmコマンドを使用して、「procmail」パッケージを「procmail-3.22-9.i386.rpm」にアップグレードしたい。ただし、「procmail」パッケージが存在しない場合は、新たにインストールしたくない。
+rpm -F procmail-3.22-9.i386.rpm
+rpm --freshen procmail-3.22-9.i386.rpm
+
+・rpmコマンドを使用して、依存関係を無視して「postfix」パッケージを強制的にアンインストールしたい。
+rpm -e --nodeps postfix
+rpm --erase --nodeps postfix
+
+・RPM系パッケージをcpio形式のアーカイブに変換するコマンド
+rpm2cpio
+
+・rpmコマンドの「-V（--verify）」オプションについて、正しい説明
+RPMデータベースに格納されているファイルに関する情報と、インストールされたパッケージのファイルに関する情報を比較して変更（改ざんなど）が無いか検査する
+検査する内容は主にファイルのサイズ、MD5チェックサム、所有ユーザ、所有グループ、タイムスタンプである
+
+・openSUSEで採用されている、パッケージ管理を行うコマンド
+zypper
+
+・zypperコマンドを使用して、リポジトリの一覧を表示させたい。
+zypper repos
+zypper lr
+
+・zypperコマンドを使用して、リポジトリを更新したい。
+zypper refresh
+
+・zypperコマンドを使用して、「emacs」パッケージをアンインストールしたい。
+zypper remove emacs
+zypper rm emacs
+
+・zypperコマンドを使用して、キーワード「vim」を含むパッケージを表示させたい。
+zypper search vim
+zypper se vim
+
+・zypperコマンドを使用して、「emacs」パッケージの詳細な情報を表示させたい。
+zypper info emacs
+
+・zypperコマンドを使用して、「emacs」で始まる名前のパッケージをすべてインストールしたい。
+zypper install emacs*
+zypper in emacs*
+
+・zypperコマンドを使用して、アップデート可能な全てのパッケージをアップデートしたい。
+zypper update
+zypper up
+
+・zypperコマンドを使用して、「emacs」パッケージをインストールしたい。
+zypper install emacs
+zypper in emacs
+
+・zypperコマンドを使用して、アップデート可能なパッケージを確認したい。
+zypper list-updates
+zypper lu
+
