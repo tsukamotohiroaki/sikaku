@@ -755,10 +755,14 @@ rpm --install --test procmail-3.22-9.i386.rpm
 ・rpmコマンドを使用して、「procmail」パッケージを「procmail-3.22-9.i386.rpm」にアップグレードしたい。また、パッケージが存在しない場合はインストールしたい。
 rpm -U procmail-3.22-9.i386.rpm
 rpm --upgrade procmail-3.22-9.i386.rpm
+※-Uは指定したパッケージがなければインストールする。
+※-Fは指定したパッケージが存在しなければインストールしない。
 
 ・rpmコマンドを使用して、「procmail」パッケージを「procmail-3.22-9.i386.rpm」にアップグレードしたい。ただし、「procmail」パッケージが存在しない場合は、新たにインストールしたくない。
 rpm -F procmail-3.22-9.i386.rpm
 rpm --freshen procmail-3.22-9.i386.rpm
+※-Uは指定したパッケージがなければインストールする。
+※-Fは指定したパッケージが存在しなければインストールしない。
 
 ・rpmコマンドを使用して、依存関係を無視して「postfix」パッケージを強制的にアンインストールしたい。
 rpm -e --nodeps postfix
@@ -807,4 +811,5 @@ zypper in emacs
 ・zypperコマンドを使用して、アップデート可能なパッケージを確認したい。
 zypper list-updates
 zypper lu
+
 
