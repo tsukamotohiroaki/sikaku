@@ -941,8 +941,7 @@ $
 $ ./program
 
 ・/etc/crontabについてのmanページを参照したい。
-$ man ___ crontab
-5
+$ man 5 crontab
 
 ・shutdownコマンドのmanページセクションはどれか
 8
