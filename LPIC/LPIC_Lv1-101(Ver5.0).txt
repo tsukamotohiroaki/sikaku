@@ -1658,5 +1658,254 @@ TERM(SIGTERM)
 screen
 tmux
 
+■プロセスの実行優先度の変更
+・プロセスのnice値を表示するコマンドは次のうちどれか。(全て選択)
+top
+ps l
+
+・優先度を指定してコマンドを実行(プロセスを起動)するコマンドは次のうちどれか。
+nice
+
+・プロセスのデフォルトのnice値は次のうちどれか。
+0
+
+・「test」プログラムを以下のように実行した。testプログラムの優先度は次のうちどれか。
+# nice test
+10
+
+・最も優先度の高いnice値は次のうちどれか。
+-20
+
+・最も優先度の低いnice値は次のうちどれか。
+19
+
+・「test」プログラムを最も高い優先度で実行したい。適切なコマンドは次のうちどれか。(全て選択)
+nice -n -20 test
+nice --20 test
+
+・すでに起動しているプロセスのnice値を変更するコマンドは次のうちどれか。
+renice
+
+・ping-tユーザが起動している全てのプロセスのnice値を10にしたい。適切なコマンドは次のうちどれか。
+renice 10 -u ping-t
+
+・PIDが500のプロセスのnice値を-20に変更したい。適切なコマンドは次のうちどれか。(全て選択)
+renice -20 -p 500
+renice -20 500
+
+■正規表現を使用してのテキストファイル検索
+・以下の「test.txt」ファイル内の全ての末尾が「.exe」という文字列を「.sh」に置換したい。適切なコマンドはどれか。
+$ cat test.txt
+file1.exe
+execfile2
+file3.exe.txt
+file4.exe
+file5exe
+
+sed 's/\.exe$/\.sh/g' test.txt
+
+
+・検索パターンをファイルから読み込むgrepコマンドのオプションは次のうちどれか。
+-f
+
+・grepコマンドで、検索パターンにマッチした行の行数のみを表示させたい。適切なgrepコマンドのオプションは次のうちどれか。
+-c
+
+・grepコマンドで、検索パターンにマッチした行を抽出(表示)する際、行頭に行番号を付けて表示させたい。適切なgrepコマンドのオプションは次のうちどれか。
+-n
+
+・「test.txt」ファイルの行頭が「#」の行を削除して表示したい。適切なコマンドは次のうちどれか。
+sed /^#/d test.txt
+
+・以下の「test.txt」ファイルに対して、「fgrep 'ping-t|PING-T' test.txt」コマンドを実行したとき、出力はどうなるか。
+$ cat test.txt
+ping-t is synthesis WEB study site. 　
+PING-T keeps always assisting in you.
+
+何も出力されない
+
+・「test.txt」ファイルから、「.*」という文字列を含む行を抽出したい。適切なコマンドは次のうちどれか。(全て選択)
+fgrep '.*' test.txt
+grep -F '.*' test.txt
+grep '\.\*' test.txt
+
+・「abcまたはxyz」を正規表現で表しているものは次のうちどれか。
+abc|xyz
+
+・「test.txt」ファイルから、「PINGT」または「pingt」という文字列を含む行を抽出したい。適切なコマンドは次のうちどれか。(全て選択)
+grep -E 'PINGT|pingt' test.txt
+egrep 'PINGT|pingt' test.txt
+
+・「test.txt」ファイルから、「PINGT」または「pingt」という文字列を含まない行を抽出したい。適切なコマンドは次のうちどれか。(2つ選択)
+grep -Ev 'PINGT|pingt' test.txt
+egrep -v 'PINGT|pingt' test.txt
+
+・「test.txt」ファイルの各行の最初に現れる「pingt」という文字列のみを「hoge」に置換したい。適切なコマンドは次のうちどれか。(全て選択)
+sed s/pingt/hoge/ test.txt
+sed -e s/pingt/hoge/ test.txt
+
+・正規表現の基本の概念として間違っているものはどれか。
+数量詞とは、「3」「③」「三」などのように数字を示す文字のことである
+
+・grepコマンドで検索する際、大文字と小文字の区別をせずに検索したい。適切なgrepコマンドのオプションは次のうちどれか。
+-i
+
+・以下の「test.txt」ファイルのうち、文字列「taro」にのみマッチするパターンを選びなさい。(全て選択)
+$ cat test.txt
+taro
+jiro
+saburo
+hanako
+sachiko
+akiko
+
+^t.*o$
+^t..o$
+
+・「test.txt」ファイル内の全ての「a」を「A」に、また「b」を「B」に置換したい。適切なコマンドは次のうちどれか。(全て選択)
+sed y/ab/AB/ test.txt
+sed -e s/a/A/g -e s/b/B/g test.txt
+
+・以下の「test.txt」ファイルのうち、「#」を含む行のみがマッチするパターンを選びなさい。(全て選択)
+$ cat test.txt
+#taro
+#jiro
+#saburo
+hanako
+sachiko
+akiko
+
+^#
+#
+#.*
+
+・「test.txt」ファイルに含まれる全ての「pingt」という文字列を「hoge」に置換したい。適切なコマンドは次のうちどれか。(全て選択)
+sed s/pingt/hoge/g test.txt
+sed -e s/pingt/hoge/g test.txt
+
+・「test.txt」ファイルの1行目から3行目を削除して表示したい。適切なコマンドは次のうちどれか。
+sed 1,3d test.txt
+
+・egrepコマンドを使用して、以下の「test.txt」ファイルから「taro」と「hanako」という2つの文字列を取り出しなさい。
+$ cat test.txt
+taro
+hanako
+jiro
+sachiko
+saburo
+emiko
+
+egrep 'taro|hanako' test.txt
+
+・sedコマンドを使用して「test.txt」ファイルの内容を編集して表示する際、編集コマンドを記述したスクリプトファイル「editfile」を使用したい。適切なコマンドは次のうちどれか。
+sed -f editfile test.txt
+
+・以下の「test.txt」ファイルがある。
+$ cat test.txt
+CentOS
+
+次のコマンドを実行した結果はどれか。
+
+$ sed s/[A-Z][a-z]/-/ test.txt
+
+-ntOS
+
+・Windowsのメモ帳で作成したテキストファイル「file1.txt」をLinuxで正しく扱うために、改行コードを変換して「file2.txt」として保存したい。適切なコマンドはどれか。(2つ選択)
+tr -d '^M' < file1.txt > file2.txt
+sed s/^M//g file1.txt > file2.txt
+
+・grepコマンドを使用し、以下の「test.txt」ファイルのうち大文字アルファベットを含まない行を表示しなさい。
+$ cat test.txt
+NAME
+grep, egrep, fgrep - print lines matching a pattern
+SYNOPSIS
+grep [options] PATTERN [FILE...]
+grep [options] [-e PATTERN | -f FILE] [FILE...]
+
+grep -v '[A-Z]' test.txt
+
+・「httpd.conf」ファイルから、行頭が「#」ではない行を抽出したい。適切なコマンドは次のうちどれか。
+grep -v '^#' httpd.conf
+
+
+以下の「test.txt」ファイルに対して、「grep '1234.' test.txt」コマンドを実行した時に出力される行はどれか。(全て選択)
+$ cat test.txt
+123
+1223
+1233
+12344
+123445
+0123499
+
+12344
+123445
+0123499
+
+・大文字のアルファベット1文字を表す正規表現は次のうちどれか。
+[A-Z]
+
+・以下の「test.txt」ファイルのうち、「12345」の行とのみマッチする正規表現はどれか。（全て選択）
+$ cat test.txt
+1
+12
+123
+1234
+12345
+
+^1.*5$
+1...5
+
+・以下の「test.txt」ファイルに対して、「grep -E 'bu+!' test.txt」コマンドを実行した時に出力される行はどれか。(全て選択)
+$ cat test.txt
+b!
+ba!
+bu!
+buu!
+buuu!
+
+bu!
+buu!
+buuu!
+
+・「test.txt」ファイルからPINという文字列を含む行を抽出したい。適切なコマンドは次のうちどれか。(全て選択)
+grep PIN test.txt
+cat test.txt | grep PIN
+
+・以下の「test.txt」ファイルにある「ping-t」を「HOGE」に変換して出力したい。
+適切なコマンドを答えなさい。
+$ cat test.txt
+ping-t is synthesis WEB study site. 　
+PING-T keeps always assisting in you.
+
+sed -e 's/p....t/HOGE/g' test.txt
+
+・直前の文字の0回もしくは1回の繰り返しを意味する正規表現は次のうちどれか。
+?
+
+・journalctlコマンドの出力結果を保存した「system.log」ファイルがあり、全ての行に「hh:mm:ss」形式で時刻が記録されている。17時台の行を抽出できるコマンドは次のうちどれか。(2つ選択)
+grep -E '17:[0-9]+:[0-9]+' system.log
+grep -E '17:[0-5][0-9]:[0-5][0-9]' system.log
+
+・直前の文字の1回以上の繰り返しを意味する正規表現は次のうちどれか。
++
+
+・正規表現の「a.[^b]d」にマッチする文字列は次のうちどれか。(全て選択)
+abcd
+abdd
+aacd
+
+以下の「test.txt」ファイルに対して、「grep -E 'bu?!' test.txt」コマンドを実行した時に出力される行はどれか。(全て選択)
+$ cat test.txt
+b!
+ba!
+bu!
+buu!
+buuu!
+
+b!
+bu!
+
+・「test.txt」ファイル内の全ての「pingt」という文字列を「hoge」に置換し、行頭が「#」の行を削除して表示したい。適切なコマンドは次のうちどれか。
+sed -e s/pingt/hoge/g -e /^#/d test.txt
 
 
